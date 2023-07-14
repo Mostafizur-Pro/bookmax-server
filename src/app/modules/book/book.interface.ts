@@ -1,4 +1,4 @@
-export type IUser = {
+export type IBook = {
   title: string;
   image_link: string;
   genre: string;

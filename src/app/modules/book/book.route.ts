@@ -1,8 +1,8 @@
 import express from "express";
-import userController from "./book.controller";
+import bookController from "./book.controller";
 
 const router = express.Router();
-router.post("/create-book", userController.createUser);
-router.get("", userController.getAllUser);
+router.post("/create-book", bookController.createBook);
+router.get("", bookController.getAllBook);
 
-export const UserRoute = router;
+export const BookRoute = router;

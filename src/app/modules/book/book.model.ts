@@ -1,9 +1,9 @@
 import { Model, Schema, model } from "mongoose";
-import { IUser } from "./book.interface";
+import { IBook } from "./book.interface";
 
-type UserModel = Model<IUser, object>;
+type BookModel = Model<IBook, object>;
 
-const userSchema = new Schema<IUser>({
+const bookSchema = new Schema<IBook>({
   title: {
     type: String,
     required: true,
@@ -25,4 +25,4 @@ const userSchema = new Schema<IUser>({
     required: true,
   },
 });
-export const User = model<IUser, UserModel>("User", userSchema);
+export const Book = model<IBook, BookModel>("Book", bookSchema);

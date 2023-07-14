@@ -1,17 +1,17 @@
 import { IGenericResponse } from "../../../Interface/common";
-import { IUser } from "./book.interface";
-import { User } from "./book.model";
+import { IBook } from "./book.interface";
+import { Book } from "./book.model";
 
-export const createUser = async (user: IUser): Promise<IUser> => {
-  const createdUser = await User.create(user);
-  if (!createUser) {
-    throw new Error("Failed to create user!");
+export const createBook = async (book: IBook): Promise<IBook> => {
+  const createdBook = await Book.create(book);
+  if (!createBook) {
+    throw new Error("Failed to create Book!");
   }
 
-  return createdUser;
+  return createdBook;
 };
-export const getAllUser = async (): Promise<IGenericResponse<IUser[]>> => {
-  const result = await User.find();
+export const getAllBook = async (): Promise<IGenericResponse<IBook[]>> => {
+  const result = await Book.find();
   const total = result.length;
 
   return {
@@ -22,4 +22,4 @@ export const getAllUser = async (): Promise<IGenericResponse<IUser[]>> => {
   };
 };
 
-export default { createUser, getAllUser };
+export default { createBook, getAllBook };

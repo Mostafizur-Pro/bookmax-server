@@ -1,39 +1,39 @@
 import { Request, Response } from "express";
-import userService from "./book.service";
+import bookService from "./book.service";
 
-const createUser = async (req: Request, res: Response) => {
+const createBook = async (req: Request, res: Response) => {
   try {
-    const { user } = req.body;
-    const result = await userService.createUser(user);
+    const { book } = req.body;
+    const result = await bookService.createBook(book);
     res.status(400).json({
       success: true,
-      message: "User created successfully",
+      message: "Book created successfully",
       data: result,
     });
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: "Failed to create user",
+      message: "Failed to create book",
     });
   }
 };
-const getAllUser = async (req: Request, res: Response) => {
+const getAllBook = async (req: Request, res: Response) => {
   try {
-    const result = await userService.getAllUser();
+    const result = await bookService.getAllBook();
     res.status(400).json({
       success: true,
-      message: "All User get successfully",
+      message: "All book get successfully",
       data: result,
     });
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: "Failed to get all user",
+      message: "Failed to get all book",
     });
   }
 };
 
 export default {
-  createUser,
-  getAllUser,
+  createBook,
+  getAllBook,
 };
