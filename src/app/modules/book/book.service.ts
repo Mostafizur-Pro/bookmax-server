@@ -1,6 +1,6 @@
 import { IGenericResponse } from "../../../Interface/common";
-import { IUser } from "./user.interface";
-import { User } from "./user.model";
+import { IUser } from "./book.interface";
+import { User } from "./book.model";
 
 export const createUser = async (user: IUser): Promise<IUser> => {
   const createdUser = await User.create(user);
