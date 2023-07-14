@@ -1,3 +1,4 @@
+import { IGenericResponse } from "../../../Interface/common";
 import { IUser } from "./user.interface";
 import { User } from "./user.model";
 
@@ -9,5 +10,16 @@ export const createUser = async (user: IUser): Promise<IUser> => {
 
   return createdUser;
 };
+export const getAllUser = async (): Promise<IGenericResponse<IUser[]>> => {
+  const result = await User.find();
+  const total = result.length;
 
-export default { createUser };
+  return {
+    meta: {
+      total,
+    },
+    data: result,
+  };
+};
+
+export default { createUser, getAllUser };
