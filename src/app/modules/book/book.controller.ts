@@ -3,7 +3,7 @@ import bookService from "./book.service";
 
 const createBook = async (req: Request, res: Response) => {
   try {
-    const { book } = req.body;
+    const book = req.body;
     const result = await bookService.createBook(book);
     res.status(400).json({
       success: true,

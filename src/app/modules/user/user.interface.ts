@@ -4,3 +4,7 @@ export type IUser = {
   email: string;
   password: string;
 };
+
+export type IUserFilters = {
+  searchTerm?: string;
+};
