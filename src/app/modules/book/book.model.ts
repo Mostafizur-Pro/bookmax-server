@@ -5,6 +5,9 @@ type BookModel = Model<IBook, object>;
 
 const bookSchema = new Schema<IBook>(
   {
+    _id: {
+      type: String,
+    },
     title: {
       type: String,
       required: true,
