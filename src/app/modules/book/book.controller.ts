@@ -1,39 +1,77 @@
 import { Request, Response } from "express";
-import bookService from "./book.service";
+import { BookService } from "./book.service";
+import pick from "../../../shared/pick";
 
 const createBook = async (req: Request, res: Response) => {
   try {
-    const book = req.body;
-    const result = await bookService.createBook(book);
-    res.status(400).json({
+    const { book } = req.body;
+    console.log(book);
+    const result = await BookService.createBook(book);
+    res.status(200).json({
       success: true,
-      message: "Book created successfully",
+      message: "Book added SuccessFully",
       data: result,
     });
   } catch (error) {
     res.status(400).json({
       success: false,
-      message: "Failed to create book",
-    });
-  }
-};
-const getAllBook = async (req: Request, res: Response) => {
-  try {
-    const result = await bookService.getAllBook();
-    res.status(400).json({
-      success: true,
-      message: "All book get successfully",
-      data: result,
-    });
-  } catch (error) {
-    res.status(400).json({
-      success: false,
-      message: "Failed to get all book",
+      message: "Cannot created book successfully",
     });
   }
 };
 
-export default {
+const getAllBook = async (req: Request, res: Response) => {
+  const filters = pick(req.query, ["searchTerm", "title", "author", "genre"]);
+  const paginationOptions = pick(req.query, [
+    "page",
+    "limit",
+    "sortBy",
+    "sortOrder",
+  ]);
+  const result = await BookService.getBooks(filters, paginationOptions);
+  res.status(200).json({
+    success: true,
+    message: "Book Retrieved SuccessFully",
+    meta: result.meta,
+    data: result.data,
+  });
+};
+
+const getSingleBook = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await BookService.getSingleBook(id);
+  res.status(200).json({
+    success: true,
+    message: "Book Retrieved SuccessFully",
+    data: result,
+  });
+};
+const updateBooks = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const updatedData = req.body;
+
+  const result = await BookService.updateBook(id, updatedData);
+  res.status(200).json({
+    success: true,
+    message: "Book Retrieved SuccessFully",
+    data: result,
+  });
+};
+
+const deleteBook = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const result = await BookService.deleteBook(id);
+  res.status(200).json({
+    success: true,
+    message: "Book Deleted SuccessFully",
+    data: result,
+  });
+};
+
+export const BookController = {
   createBook,
   getAllBook,
+  getSingleBook,
+  updateBooks,
+  deleteBook,
 };

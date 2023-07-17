@@ -1,13 +1,10 @@
 import { Model, Schema, model } from "mongoose";
-import { IBook } from "./book.interface";
+import { IBooks } from "./book.interface";
 
-type BookModel = Model<IBook, object>;
+type BookModel = Model<IBooks, object>;
 
-const bookSchema = new Schema<IBook>(
+const bookSchema = new Schema<IBooks>(
   {
-    _id: {
-      type: String,
-    },
     title: {
       type: String,
       required: true,
@@ -36,4 +33,4 @@ const bookSchema = new Schema<IBook>(
     timestamps: true,
   }
 );
-export const Book = model<IBook, BookModel>("Book", bookSchema);
+export const Book = model<IBooks, BookModel>("Book", bookSchema);

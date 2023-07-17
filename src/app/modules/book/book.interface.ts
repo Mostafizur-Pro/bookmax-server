@@ -1,5 +1,4 @@
-export type IBook = {
-  _id?: string;
+export type IBooks = {
   title: string;
   image_link: string;
   email?: string;
