@@ -9,7 +9,7 @@ export type IBooks = {
   genre: string;
   author: string;
   publication: string;
-  comment: IComment[];
+  review: IComment[];
 };
 
 export const BookFilterableFields = ["searchTerm", "title", "author", "genre"];

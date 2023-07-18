@@ -12,28 +12,28 @@ const createBook = async (book: IBooks): Promise<IBooks | null> => {
   return createBook;
 };
 
-// const addComment = async (id: string, payload: IComment) => {
-//   const result = await Book.findById(id);
-//   console.log(result);
-//   console.log(payload);
-//   result?.review.push(payload);
-//   await result?.save();
-// };
-const addComment = async (
-  id: string,
-  payload: IComment
-): Promise<IBooks | null> => {
-  const { ...updateData } = payload;
-
-  const result = await Book.findOneAndUpdate(
-    { _id: id },
-    { $push: { reviews: updateData } },
-    {
-      new: true,
-    }
-  );
-  return result;
+const addComment = async (id: string, payload: IComment) => {
+  const result = await Book.findById(id);
+  // console.log(result);
+  // console.log(payload);
+  result?.review.push(payload);
+  return await result?.save();
 };
+// const addComment = async (
+//   id: string,
+//   payload: IComment
+// ): Promise<IBooks | null> => {
+//   const { ...updateData } = payload;
+
+//   const result = await Book.findOneAndUpdate(
+//     { _id: id },
+//     { $push: { reviews: updateData } },
+//     {
+//       new: true,
+//     }
+//   );
+//   return result;
+// };
 
 const getSingleBook = async (id: string): Promise<IBooks | null> => {
   const result = await Book.findById(id);
