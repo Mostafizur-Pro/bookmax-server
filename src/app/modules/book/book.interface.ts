@@ -6,3 +6,5 @@ export type IBooks = {
   author: string;
   publication: string;
 };
+
+export const BookFilterableFields = ["searchTerm", "title", "author", "genre"];

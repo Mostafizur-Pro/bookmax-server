@@ -2,6 +2,7 @@ import { SortOrder } from "mongoose";
 import { paginationHelpers } from "../../../Helpers/PaginationHelper";
 import { IBooks } from "./book.interface";
 import { Book } from "./book.model";
+import { IGenericResponse } from "../../../Interface/common";
 
 const createBook = async (book: IBooks): Promise<IBooks | null> => {
   const createBook = await Book.create(book);
@@ -23,16 +24,7 @@ type paginationOption = {
   sortOrder?: "asc" | "desc";
 };
 
-type IGenericResponse<T> = {
-  meta: {
-    page: number;
-    limit: number;
-    total: number;
-  };
-  data: T;
-};
-
-type IBookFilter = { searchTerm: string };
+type IBookFilter = { searchTerm?: string };
 const getBooks = async (
   filters: IBookFilter,
   paginationOptions: paginationOption

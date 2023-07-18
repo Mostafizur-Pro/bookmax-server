@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import { BookService } from "./book.service";
 import pick from "../../../shared/pick";
+import { BookFilterableFields } from "./book.interface";
+import { IPaginationFields } from "../../constants/pagination";
 
 const createBook = async (req: Request, res: Response) => {
   try {
@@ -21,13 +23,8 @@ const createBook = async (req: Request, res: Response) => {
 };
 
 const getAllBook = async (req: Request, res: Response) => {
-  const filters = pick(req.query, ["searchTerm", "title", "author", "genre"]);
-  const paginationOptions = pick(req.query, [
-    "page",
-    "limit",
-    "sortBy",
-    "sortOrder",
-  ]);
+  const filters = pick(req.query, BookFilterableFields);
+  const paginationOptions = pick(req.query, IPaginationFields);
   const result = await BookService.getBooks(filters, paginationOptions);
   res.status(200).json({
     success: true,

@@ -15,6 +15,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BookController = void 0;
 const book_service_1 = require("./book.service");
 const pick_1 = __importDefault(require("../../../shared/pick"));
+const book_interface_1 = require("./book.interface");
+const pagination_1 = require("../../constants/pagination");
 const createBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { book } = req.body;
@@ -34,13 +36,8 @@ const createBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     }
 });
 const getAllBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const filters = (0, pick_1.default)(req.query, ["searchTerm", "title", "author", "genre"]);
-    const paginationOptions = (0, pick_1.default)(req.query, [
-        "page",
-        "limit",
-        "sortBy",
-        "sortOrder",
-    ]);
+    const filters = (0, pick_1.default)(req.query, book_interface_1.BookFilterableFields);
+    const paginationOptions = (0, pick_1.default)(req.query, pagination_1.IPaginationFields);
     const result = yield book_service_1.BookService.getBooks(filters, paginationOptions);
     res.status(200).json({
         success: true,
